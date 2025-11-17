@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>認証ページ</title>
+  <style>
+    body {
+      font-family: 'Rounded Mplus 1c', 'Yu Gothic', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7ff, #f5fcff);
+      color: #4b90a6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #ffffffee;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+    }
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 1.1em;
+    }
+    #downloadBtn {
+      margin-top: 30px;
+      padding: 10px 30px;
+      font-size: 1.2em;
+      color: white;
+      background-color: #4b90a6;
+      border: none;
+      border-radius: 8px;
+      cursor: not-allowed;
+      opacity: 0.5;
+      transition: opacity 0.3s ease;
+    }
+    #downloadBtn.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+    #message {
+      margin-top: 20px;
+      font-size: 0.95em;
+      color: #777;
+      line-height: 1.6em;
+    }
+    .styled-message {
+      padding: 15px;
+      border-radius: 12px;
+      background: #f0fbff;
+      color: #4b90a6;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 1s ease both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>使用前にご確認をお願いします</h1>
+    <label>
+      <input type="checkbox" id="humanCheck" />
+      私はロボットではありません
+    </label>
+    <div id="message">チェック後にボタンが有効になります</div>
+    <button id="downloadBtn">Webに接続します</button>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById("humanCheck");
+    const button = document.getElementById("downloadBtn");
+    const message = document.getElementById("message");
+
+    checkbox.addEventListener("change", function () {
+      if (this.checked) {
+        button.disabled = false;
+        button.classList.add("enabled");
+        message.textContent = "本人確認済み：Web準備OK！";
+      } else {
+        button.disabled = true;
+        button.classList.remove("enabled");
+        message.textContent = "チェック後にボタンが有効になります";
+      }
+    });
+
+    button.addEventListener("click", function () {
+      message.textContent = "検証中... 少々お待ちください";
+      button.disabled = true;
+
+      setTimeout(() => {
+        button.style.display = "none";
+        message.innerHTML = `
+          <div class="styled-message">
+            ⏳ まもなくWebに接続します…<br>
+            <small>接続されない場合はページを再読み込みしてください</small>
+          </div>
+        `;
+        const link = document.createElement('a');
+        link.href = '時計(黒).html'; // ←ファイルURLをここに
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
