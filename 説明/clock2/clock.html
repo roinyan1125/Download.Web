@@ -103,7 +103,6 @@
 
     .btn-download {
       display: inline-block;
-      margin-top: 10px;
       padding: 12px 30px;
       font-size: 1em;
       background: linear-gradient(145deg, #b8e4ff, #92d0ff);
@@ -119,6 +118,14 @@
       background: linear-gradient(145deg, #a0daff, #7fc9f5);
       transform: translateY(-2px);
     }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
   </style>
 </head>
 <body>
@@ -135,8 +142,6 @@
   </div>
 
   <div class="description">
-【配信用カスタム時計（OBS対応）】<br><br>
-
 このページでは、配信用のカスタム時計を提供しています。<br>
 設定を変更すると、OBS で使える URL が自動で生成されます。<br>
 作ったデザインを、そのまま配信画面に反映できます。<br><br>
@@ -168,16 +173,15 @@
 ・OBSに貼り付けた時点で同じデザインが表示されます。<br>
   </div>
 
-  <!-- 正しくページ遷移するボタン -->
-  <a class="btn-download" href="https://roinyan1125.github.io/tokei/main.html">
-    使用する
-  </a>
+  <div class="button-row">
+    <a class="btn-download" href="https://roinyan1125.github.io/tokei/main.html">
+      使用する
+    </a>
 
-  <br><br>
-
-  <a class="btn-download" href="../../page/overlay/overlay.html" style="margin-top: 30px; background: #eee; color: #333;">
-    ⬅ 前に戻る
-  </a>
+    <a class="btn-download" href="../../page/overlay/overlay.html" style="background:#eee;color:#333;">
+      ⬅ 前に戻る
+    </a>
+  </div>
 
   <script>
     const media = ["sample.mp4", "image1.png", "image2.png"];
